@@ -1,37 +1,57 @@
-<%= form_with(model: user) do |form| %>
+<div class="depot_form">
+
+  <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+  <div id="error_explanation">
+    <h2><%= pluralize(user.errors.count, "error") %>
+      prohibited this user from being saved:</h2>
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul>
+      <% user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :nome %>
-    <%= form.text_field :nome %>
+<br>
+  <div class="container">
+  <div class="forms">
+    <h2>Cadastro</h2>
+    <hr>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
+  <div class="container">
+    <h5>Preencha o formulário para criar sua conta:</h5>
+    <br>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
+    <div class="field">
+      <%= form.label :name, 'Nome:' %>
+      <%= form.text_field :name, size: 40, class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </div>
+    <div class="field">
+      <%= form.label :email, 'E-mail:' %>
+      <%= form.text_field :email, size: 40, class: "form-control" %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div class="field">
+      <%= form.label :password, 'Senha:' %>
+      <%= form.password_field :password, size: 40, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password_confirmation, 'Confirmar a senha:' %>
+
+      <%= form.password_field :password_confirmation,
+                            id: :user_password_confirmation,
+                            size: 40, class: "form-control" %>
+
+    </div>
+    <br>
+    <div class="actions">
+      <%= form.submit 'Cadastrar' %>
+    </div>
+    <% end %>
+
   </div>
-<% end %>
+</div>
