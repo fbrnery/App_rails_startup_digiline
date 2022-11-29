@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :authorize, only: [:new, :create]
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_url,
+        format.html { redirect_to admin_url,
         notice: "User #{@user.email} was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
